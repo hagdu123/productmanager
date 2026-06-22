@@ -127,7 +127,9 @@ app.delete("/delete/:id", async(req,res)=>{
 });
 
 
-
+app.get("/", (req,res)=>{
+  res.send("Product Manager API is running");
+});
 
 
 app.listen(5000,()=>{
