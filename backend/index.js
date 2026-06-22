@@ -9,14 +9,15 @@ app.use(express.json());
 
 
 mongoose.connect(
-  "mongodb://localhost:27017/productmanager"
+"mongodb+srv://mahermahru_db_user:1zUNigVxKJ4NoMtF@cluster0.okgpkjo.mongodb.net/?appName=Cluster0"
 )
 .then(()=>{
-  console.log("MongoDB connected");
+ console.log("MongoDB connected")
 })
 .catch((err)=>{
-  console.log(err);
-});
+ console.log(err)
+})
+
 
 
 // Schema
