@@ -1,21 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_URL = "https://productmanager-b3is.onrender.com";
 
 function ProductManager() {
 
-
   const [products, setProducts] = useState([]);
-
 
   const [product, setProduct] = useState({
     name: "",
     price: ""
   });
 
-
   const [editId, setEditId] = useState(null);
-
 
 
   // READ PRODUCTS
@@ -23,13 +20,12 @@ function ProductManager() {
   const getProducts = async () => {
 
     const res = await axios.get(
-      "http://localhost:5000/products"
+      `${API_URL}/products`
     );
 
     setProducts(res.data);
 
   };
-
 
 
   useEffect(() => {
@@ -40,21 +36,19 @@ function ProductManager() {
 
 
 
-
-
   // ADD + UPDATE PRODUCT
 
   const saveProduct = async () => {
 
 
-    if(editId){
+    if (editId) {
 
 
       // UPDATE
 
       await axios.put(
 
-        `http://localhost:5000/update/${editId}`,
+        `${API_URL}/update/${editId}`,
 
         product
 
@@ -64,73 +58,66 @@ function ProductManager() {
       setEditId(null);
 
 
-    } 
-    else {
+    } else {
 
 
       // CREATE
 
       await axios.post(
 
-        "http://localhost:5000/add",
+        `${API_URL}/add`,
 
         product
 
       );
 
-
     }
-
 
 
     setProduct({
 
-      name:"",
-      price:""
+      name: "",
+      price: ""
 
     });
 
 
     getProducts();
 
-
   };
-
 
 
 
 
   // DELETE PRODUCT
 
-  const deleteProduct = async(id)=>{
+  const deleteProduct = async (id) => {
 
 
     await axios.delete(
 
-      `http://localhost:5000/delete/${id}`
+      `${API_URL}/delete/${id}`
 
     );
 
 
     getProducts();
 
-
   };
-
 
 
 
 
   // EDIT CLICK
 
-  const editProduct = (item)=>{
+  const editProduct = (item) => {
 
 
     setProduct({
 
-      name:item.name,
+      name: item.name,
 
-      price:item.price
+      price: item.price
 
     });
 
@@ -143,7 +130,6 @@ function ProductManager() {
 
 
 
-
   return (
 
     <div>
@@ -152,72 +138,60 @@ function ProductManager() {
       <h1>Product Manager</h1>
 
 
-
       <input
 
-      placeholder="Product Name"
+        placeholder="Product Name"
 
-      value={product.name}
+        value={product.name}
 
-      onChange={(e)=>
+        onChange={(e) =>
 
-        setProduct({
+          setProduct({
 
-          ...product,
+            ...product,
 
-          name:e.target.value
+            name: e.target.value
 
-        })
+          })
 
-      }
+        }
 
       />
 
 
 
-
-
       <input
 
-      placeholder="Price"
+        placeholder="Price"
 
-      value={product.price}
+        value={product.price}
 
-      onChange={(e)=>
+        onChange={(e) =>
 
-        setProduct({
+          setProduct({
 
-          ...product,
+            ...product,
 
-          price:e.target.value
+            price: e.target.value
 
-        })
+          })
 
-      }
+        }
 
       />
-
-
 
 
 
       <button onClick={saveProduct}>
 
-
         {editId ? "Update Product" : "Add Product"}
-
 
       </button>
 
 
 
-
-
-
       {
-
-        products.map((item)=>(
-
+        products.map((item) => (
 
           <div key={item._id}>
 
@@ -229,7 +203,6 @@ function ProductManager() {
             </h3>
 
 
-
             <p>
 
               ${item.price}
@@ -238,11 +211,9 @@ function ProductManager() {
 
 
 
-
-
             <button
 
-            onClick={()=>editProduct(item)}
+              onClick={() => editProduct(item)}
 
             >
 
@@ -252,11 +223,9 @@ function ProductManager() {
 
 
 
-
-
             <button
 
-            onClick={()=>deleteProduct(item._id)}
+              onClick={() => deleteProduct(item._id)}
 
             >
 
@@ -268,13 +237,8 @@ function ProductManager() {
 
           </div>
 
-
         ))
-
       }
-
-
-
 
 
     </div>
@@ -282,7 +246,6 @@ function ProductManager() {
   );
 
 }
-
 
 
 export default ProductManager;
