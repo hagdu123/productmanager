@@ -9,7 +9,7 @@ app.use(express.json());
 
 
 mongoose.connect(
-"mongodb+srv://mahermahru_db_user:1zUNigVxKJ4NoMtF@cluster0.okgpkjo.mongodb.net/?appName=Cluster0"
+"mongodb+srv://mahermahru_db_user:1zUNigVxKJ4NoMtF@cluster0.okgpkjo.mongodb.net/productmanager?retryWrites=true&w=majority"
 )
 .then(()=>{
  console.log("MongoDB connected")
